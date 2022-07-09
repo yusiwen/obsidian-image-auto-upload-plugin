@@ -1,16 +1,4 @@
-import {
-  MarkdownView,
-  Plugin,
-  FileSystemAdapter,
-  Editor,
-  Menu,
-  MenuItem,
-  TFile,
-  normalizePath,
-  Notice,
-  addIcon,
-  App,
-} from "obsidian";
+import { MarkdownView, App } from "obsidian";
 import { parse } from "path";
 
 interface Image {

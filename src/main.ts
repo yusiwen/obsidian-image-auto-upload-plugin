@@ -11,18 +11,16 @@ import {
   addIcon,
 } from "obsidian";
 
-import { resolve, extname, relative, join, parse, posix } from "path";
+import { resolve, relative, join, parse, posix } from "path";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 
 import {
   isAssetTypeAnImage,
   isAnImage,
-  streamToString,
   getUrlAsset,
   isCopyImageFile,
-  getLastImage,
 } from "./utils";
-import { PicGoUploader, PicGoCoreUploader } from "./uploader";
+import { PicGoUploader } from "./uploader";
 import Helper from "./helper";
 
 import fetch from "node-fetch";
@@ -42,7 +40,6 @@ export default class imageAutoUploadPlugin extends Plugin {
   helper: Helper;
   editor: Editor;
   picGoUploader: PicGoUploader;
-  picGoCoreUploader: PicGoCoreUploader;
 
   async loadSettings() {
     this.settings = Object.assign(DEFAULT_SETTINGS, await this.loadData());
@@ -59,7 +56,6 @@ export default class imageAutoUploadPlugin extends Plugin {
 
     this.helper = new Helper(this.app);
     this.picGoUploader = new PicGoUploader(this.settings);
-    this.picGoCoreUploader = new PicGoCoreUploader(this.settings);
 
     addIcon(
       "upload",
@@ -370,8 +366,6 @@ export default class imageAutoUploadPlugin extends Plugin {
                 let res;
                 if (this.settings.uploader === "PicGo") {
                   res = await this.picGoUploader.uploadFileByClipboard();
-                } else if (this.settings.uploader === "PicGo-Core") {
-                  res = await this.picGoCoreUploader.uploadByClipHandler();
                 }
 
                 if (res.code !== 0) {
