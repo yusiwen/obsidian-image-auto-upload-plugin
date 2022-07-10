@@ -48,7 +48,6 @@ export class SettingTab extends PluginSettingTab {
       .addDropdown(cb =>
         cb
           .addOption("PicGo", "PicGo(app)")
-          .addOption("PicGo-Core", "PicGo-Core")
           .setValue(this.plugin.settings.uploader)
           .onChange(async value => {
             this.plugin.settings.uploader = value;
@@ -67,23 +66,6 @@ export class SettingTab extends PluginSettingTab {
             .setValue(this.plugin.settings.uploadServer)
             .onChange(async key => {
               this.plugin.settings.uploadServer = key;
-              await this.plugin.saveSettings();
-            })
-        );
-    }
-
-    if (this.plugin.settings.uploader === "PicGo-Core") {
-      new Setting(containerEl)
-        .setName("PicGo-Core path")
-        .setDesc(
-          "Please input PicGo-Core path, default using environment variables"
-        )
-        .addText(text =>
-          text
-            .setPlaceholder("")
-            .setValue(this.plugin.settings.picgoCorePath)
-            .onChange(async value => {
-              this.plugin.settings.picgoCorePath = value;
               await this.plugin.saveSettings();
             })
         );

@@ -85,7 +85,7 @@ export default class imageAutoUploadPlugin extends Plugin {
       },
     });
     this.addCommand({
-      id: "doanload all images",
+      id: "download all images",
       name: "download all images",
       checkCallback: (checking: boolean) => {
         let leaf = this.app.workspace.activeLeaf;
